@@ -1,0 +1,13 @@
+step by step process of how to pull the code in git hub
+
+step 1 --  go to git cli type "git init"
+
+step 2 -- create file "touch filename"
+
+step 3 == git add filename
+
+step 4 -- git commit -m
+
+step 5 -- git remote and origin git repo link
+
+step 6 -- git push -u origin master
