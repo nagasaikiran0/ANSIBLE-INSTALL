@@ -8,6 +8,6 @@ step 3 == git add filename
 
 step 4 -- git commit -m
 
-step 5 -- git remote and origin git repo link
+step 5 -- git remote add origin git repo link
 
 step 6 -- git push -u origin master
