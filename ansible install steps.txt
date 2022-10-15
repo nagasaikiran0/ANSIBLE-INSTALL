@@ -1,0 +1,79 @@
+ansible install steps
+
+sudo amazon-linux-extras install ansible2 -y
+
+sudo yum install git python python-pip python-level openssl -y
+
+vi /etc/ansible/hosts
+       |
+       |____   give the group name and private ip address  under Example1
+vi /etc/ansible/ansible.cfg
+         |
+         |___  remove the # comment in Inventory and Sudo User
+
+adduser
+passwd                                                                             <<_______________
+visudo                                                                                              |
+   |                                                                                                |
+   |___  :100 -> username = (ALL) NOPASSWD:ALL                                                      |
+vi /etc/ssh/sshd_config                                                                             |
+          |                                                                                         |
+          |___ :63 -> nopasswordauthentication yes                                                  |
+                                                                                                    |
+systemctl restart sshd                                                                              |
+                                                                                                    |
+_______________________________________ SLAVE-!_____________________________________                |
+                                                                                                    |
+                                                                                                    |
+adduser                                                                                             |
+passwd                                                                                              |
+visudo                                                                                              |
+   |                                                                                                |
+   |___  :100 -> username = (ALL) NOPASSWD:ALL                                                      |
+vi /etc/ssh/sshd_config                                                                             |
+          |                                                                                         |
+          |___ :63 -> nopasswordauthentication yes                                                  |
+                                                                                                    |
+systemctl restart sshd                                                                              |
+                                                                                                    |
+_______________________________________SLAVE-2________________________________                      |
+                                                                                                    |
+adduser                                                                                             |
+passwd                                                                                              |
+visudo                                                                                              |
+   |                                                                                                |
+   |___  :100 -> username = (ALL) NOPASSWD:ALL                                                      |
+vi /etc/ssh/sshd_config                                                                             |
+          |                                                                                         |
+          |___ :63 -> nopasswordauthentication yes                                                  |
+                                                                                                    |
+systemctl restart sshd                                                                              |
+                                                                                                    |
+***************************************************                                                 |
+                                                                                                    |
+create the same user in all the slave/nodes as shown in the above SLAVE-1 and SLAVE-2               |
+                                                                                                    |
+then back to the master linux                                                                       |
+           |                                                                                         |
+----------------------------------------------------------------------------------------------------
+
+ssh-keygen
+ssh-copy-id username@username private   id 
+exit
+ssh-copy-id username@slave1_userprivate id
+exit
+ssh-copy-id username@slave_userprivate  id
+exit
+
+again back to main user 
+
+ssh username@user private id
+
+ansible all --list-host
+ansible groupname --list-host
+
+ansible groupname -a "command" 
+
+ansible groupname -a "sudo yum install git -y"
+
+
